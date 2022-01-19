@@ -37,6 +37,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
@@ -68,6 +69,7 @@ import com.owncloud.android.lib.resources.shares.ShareType;
 import com.owncloud.android.lib.resources.status.OCCapability;
 import com.owncloud.android.operations.SynchronizeFileOperation;
 import com.owncloud.android.services.OperationsService;
+import com.owncloud.android.ui.activity.AppScanActivity;
 import com.owncloud.android.ui.activity.ConflictsResolveActivity;
 import com.owncloud.android.ui.activity.ExternalSiteWebView;
 import com.owncloud.android.ui.activity.FileActivity;
@@ -84,6 +86,7 @@ import com.owncloud.android.utils.DisplayUtils;
 import com.owncloud.android.utils.FileStorageUtils;
 import com.owncloud.android.utils.PermissionUtil;
 import com.owncloud.android.utils.UriUtils;
+import com.zynksoftware.documentscanner.ui.DocumentScanner;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -109,7 +112,6 @@ import androidx.annotation.Nullable;
 import androidx.core.content.FileProvider;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-import nz.mega.documentscanner.DocumentScannerActivity;
 
 /**
  * Helper implementation for file operations locally and remote.
@@ -1066,7 +1068,13 @@ public class FileOperationsHelper {
     }
 
     public void scanFromCamera(Activity activity, int requestCode) {
-        Intent scanIntent = DocumentScannerActivity.getIntent(activity);
+        DocumentScanner.Configuration configuration = new DocumentScanner.Configuration();
+        configuration.setImageQuality(100);
+        configuration.setImageSize(1000000); // 1 MB  
+        configuration.setImageType(Bitmap.CompressFormat.JPEG);
+        DocumentScanner.INSTANCE.init(activity, configuration);
+
+        Intent scanIntent = new Intent(activity, AppScanActivity.class);
         if (PermissionUtil.checkSelfPermission(activity, Manifest.permission.CAMERA)) {
             activity.startActivityForResult(scanIntent, requestCode);
         } else {
