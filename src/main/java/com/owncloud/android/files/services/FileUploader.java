@@ -195,7 +195,7 @@ public class FileUploader extends Service
     @Inject PowerManagementService powerManagementService;
     @Inject LocalBroadcastManager localBroadcastManager;
 
-    private final IndexedForest<UploadFileOperation> mPendingUploads = new IndexedForest<>();
+    private IndexedForest<UploadFileOperation> mPendingUploads = new IndexedForest<>();
 
     /**
      * {@link UploadFileOperation} object of ongoing upload. Can be null. Note: There can only be one concurrent
@@ -1128,7 +1128,7 @@ public class FileUploader extends Service
 
     /**
      * Binder to let client components to perform operations on the queue of uploads.
-     * <p>
+     *
      * It provides by itself the available operations.
      */
     public class FileUploaderBinder extends Binder implements OnDatatransferProgressListener {
@@ -1136,7 +1136,7 @@ public class FileUploader extends Service
         /**
          * Map of listeners that will be reported about progress of uploads from a {@link FileUploaderBinder} instance
          */
-        private final Map<String, OnDatatransferProgressListener> mBoundListeners = new HashMap<>();
+        private Map<String, OnDatatransferProgressListener> mBoundListeners = new HashMap<>();
 
         /**
          * Cancels a pending or current upload of a remote file.
@@ -1371,7 +1371,7 @@ public class FileUploader extends Service
 
     /**
      * Upload worker. Performs the pending uploads in the order they were requested.
-     * <p>
+     *
      * Created with the Looper of a new thread, started in {@link FileUploader#onCreate()}.
      */
     private static class ServiceHandler extends Handler {

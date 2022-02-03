@@ -44,7 +44,6 @@ import com.owncloud.android.utils.theme.ThemeColorUtils;
 import com.owncloud.android.utils.theme.ThemeDrawableUtils;
 import com.owncloud.android.utils.theme.ThemeUtils;
 
-
 /**
  * FAB menu {@link android.app.Dialog} styled as a bottom sheet for main actions.
  */

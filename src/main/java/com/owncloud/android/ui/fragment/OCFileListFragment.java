@@ -213,7 +213,7 @@ public class OCFileListFragment extends ExtendedListFragment implements
 
     protected MenuItemAddRemove menuItemAddRemoveValue = MenuItemAddRemove.ADD_GRID_AND_SORT_WITH_SEARCH;
 
-    private final List<MenuItem> mOriginalMenuItems = new ArrayList<>();
+    private List<MenuItem> mOriginalMenuItems = new ArrayList<>();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -587,7 +587,7 @@ public class OCFileListFragment extends ExtendedListFragment implements
     @Override
     public void showTemplate(Creator creator, String headline) {
         ChooseTemplateDialogFragment.newInstance(mFile, creator, headline).show(requireActivity().getSupportFragmentManager(),
-                                                                                DIALOG_CREATE_DOCUMENT);
+                                                                      DIALOG_CREATE_DOCUMENT);
     }
 
     /**
@@ -595,7 +595,8 @@ public class OCFileListFragment extends ExtendedListFragment implements
      * <p>
      * Manages input from the user when one or more files or folders are selected in the list.
      * <p>
-     * Also listens to changes in navigation drawer to hide and recover multiple selection when it's opened and closed.
+     * Also listens to changes in navigation drawer to hide and recover multiple selection when it's opened
+     * and closed.
      */
     private class MultiChoiceModeListener implements AbsListView.MultiChoiceModeListener, DrawerLayout.DrawerListener {
 
@@ -609,7 +610,7 @@ public class OCFileListFragment extends ExtendedListFragment implements
         /**
          * Selected items in list when action mode is closed by drawer
          */
-        private final Set<OCFile> mSelectionWhenActionModeClosedByDrawer = new HashSet<>();
+        private Set<OCFile> mSelectionWhenActionModeClosedByDrawer = new HashSet<>();
 
         @Override
         public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
@@ -622,8 +623,8 @@ public class OCFileListFragment extends ExtendedListFragment implements
         }
 
         /**
-         * When the navigation drawer is closed, action mode is recovered in the same state as was when the drawer was
-         * (started to be) opened.
+         * When the navigation drawer is closed, action mode is recovered in the same state as was
+         * when the drawer was (started to be) opened.
          *
          * @param drawerView Navigation drawer just closed.
          */
@@ -642,8 +643,8 @@ public class OCFileListFragment extends ExtendedListFragment implements
         }
 
         /**
-         * If the action mode is active when the navigation drawer starts to move, the action mode is closed and the
-         * selection stored to be recovered when the drawer is closed.
+         * If the action mode is active when the navigation drawer starts to move, the action
+         * mode is closed and the selection stored to be recovered when the drawer is closed.
          *
          * @param newState One of STATE_IDLE, STATE_DRAGGING or STATE_SETTLING.
          */
@@ -651,7 +652,7 @@ public class OCFileListFragment extends ExtendedListFragment implements
         public void onDrawerStateChanged(int newState) {
             if (DrawerLayout.STATE_DRAGGING == newState && mActiveActionMode != null) {
                 mSelectionWhenActionModeClosedByDrawer.addAll(((OCFileListAdapter) getRecyclerView().getAdapter())
-                                                                  .getCheckedItems());
+                        .getCheckedItems());
                 mActiveActionMode.finish();
                 mActionModeClosedByDrawer = true;
             }
@@ -754,7 +755,7 @@ public class OCFileListFragment extends ExtendedListFragment implements
 
         public void loadStateFrom(Bundle savedInstanceState) {
             mActionModeClosedByDrawer = savedInstanceState.getBoolean(KEY_ACTION_MODE_CLOSED_BY_DRAWER,
-                                                                      mActionModeClosedByDrawer);
+                    mActionModeClosedByDrawer);
         }
     }
 
