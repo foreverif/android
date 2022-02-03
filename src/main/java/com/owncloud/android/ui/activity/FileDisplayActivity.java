@@ -930,9 +930,15 @@ public class FileDisplayActivity extends FileActivity
 
                     if (hasEnoughSpaceAvailable) {
                         File file = new File(filesToUpload[0]);
+                        File renamedFile = new File(file.getParent() + PATH_SEPARATOR + FileOperationsHelper.getCapturedImageName());
 
-                        requestUploadOfFilesFromFileSystem(file.getParentFile().getAbsolutePath(),
-                                                           new String[]{file.getAbsolutePath()},
+                        if (!file.renameTo(renamedFile)) {
+                            DisplayUtils.showSnackMessage(getActivity(), "Fail to upload taken image!");
+                            return;
+                        }
+
+                        requestUploadOfFilesFromFileSystem(renamedFile.getParentFile().getAbsolutePath(),
+                                                           new String[]{renamedFile.getAbsolutePath()},
                                                            FileUploader.LOCAL_BEHAVIOUR_DELETE);
                     }
                 }

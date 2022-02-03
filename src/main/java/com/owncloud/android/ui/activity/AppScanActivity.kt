@@ -25,7 +25,6 @@ package com.owncloud.android.ui.activity
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
-import com.owncloud.android.lib.common.utils.Log_OC
 import com.zynksoftware.documentscanner.ScanActivity
 import com.zynksoftware.documentscanner.model.DocumentScannerErrorModel
 import com.zynksoftware.documentscanner.model.ScannerResults
@@ -33,7 +32,6 @@ import com.zynksoftware.documentscanner.model.ScannerResults
 class AppScanActivity : ScanActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //setContentView(R.layout.app_scan_activity_layout)
         addFragmentContentLayout()
     }
 
@@ -41,7 +39,6 @@ class AppScanActivity : ScanActivity() {
     }
 
     override fun onSuccess(scannerResults: ScannerResults) {
-        Log_OC.d(this, "test")
         val intent = Intent()
 
         intent.putExtra(

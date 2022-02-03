@@ -1069,9 +1069,7 @@ public class FileOperationsHelper {
 
     public void scanFromCamera(Activity activity, int requestCode) {
         DocumentScanner.Configuration configuration = new DocumentScanner.Configuration();
-        configuration.setImageQuality(100);
-        configuration.setImageSize(1000000); // 1 MB  
-        configuration.setImageType(Bitmap.CompressFormat.JPEG);
+        configuration.setImageType(Bitmap.CompressFormat.PNG);
         DocumentScanner.INSTANCE.init(activity, configuration);
 
         Intent scanIntent = new Intent(activity, AppScanActivity.class);
