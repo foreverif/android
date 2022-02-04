@@ -120,7 +120,8 @@
         <activity
             android:name=".ui.activity.AppScanActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            tools:ignore="LockedOrientationActivity" />
         <activity
             android:name=".ui.activity.ManageAccountsActivity"
             android:exported="false" />
